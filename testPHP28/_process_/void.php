@@ -43,11 +43,11 @@
 		}
 
 		public static function screenStart(string $data): void {
-			echo self::lineHorizontal() . $data . self::lineHorizontal();
+			echo self::lineBreak() . self::lineBreak() . self::lineHorizontal() . $data . self::lineHorizontal();
 		}
 
 		public static function screenEnd(): void {
-			echo self::lineBreak() . self::lineBreak();
+			echo self::lineBreak();
 		}
 	}
 

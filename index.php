@@ -37,7 +37,7 @@
 			// Printing storage contents.
 			function () use ($shelf) {
 				_process_\html::tabletPre($shelf->storage);
-				_process_\html::tabletShow("Hello World!", "testPHP28");
+				_process_\html::tabletShow("Hello World!");
 			},
 			true
 		);
@@ -62,7 +62,7 @@
 		$shelf = null;
 
 		$shelf = new _switch_\shelf(
-			"API"
+			"Design"
 		);
 
 		$shelf->theBracket("IJKL.");
@@ -71,7 +71,7 @@
 		$shelf = null;
 
 		$shelf = new _switch_\shelf(
-			"Design"
+			"API"
 		);
 
 		$shelf->theBracket("QRST.");
@@ -85,6 +85,8 @@
 
 		_process_\html::tabletShow("Yak", "Y");
 		_process_\html::tabletShow("Zoo", "Z");
+		_process_\html::flatShow(_process_\html::lineBreak());
+		_process_\html::flatShow(_process_\html::lineBreak());
 
 		$shelf = null;
 
