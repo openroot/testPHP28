@@ -1,6 +1,6 @@
 <?php
-	require_once("testPHP28/_procedure_/private/public.php");
-	require_once("testPHP28/_procedure_/private/protected.php");
+	require_once("testPHP28/_initiate_/private/public.php");
+	require_once("testPHP28/_initiate_/private/protected.php");
 	require_once("testPHP28/_process_/void.php");
 	require_once("testPHP28/_execute_/data.php");
 
