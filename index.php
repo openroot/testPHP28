@@ -1,7 +1,8 @@
 <?php
-	require_once("include/_procedure_/private.php");
-	require_once("include/_process_/void.php");
-	require_once("include/_execute_/data.php");
+	require_once("testPHP28/_procedure_/private/public.php");
+	require_once("testPHP28/_procedure_/private/protected.php");
+	require_once("testPHP28/_process_/void.php");
+	require_once("testPHP28/_execute_/data.php");
 
 	date_default_timezone_set("Asia/Kolkata");
 ?>
