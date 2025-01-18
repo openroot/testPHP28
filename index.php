@@ -1,7 +1,7 @@
 <?php
+	require_once("include/_procedure_/private.php");
 	require_once("include/_process_/void.php");
 	require_once("include/_execute_/data.php");
-	require_once("private/protected/mysql/configurationMysql.php");
 
 	date_default_timezone_set("Asia/Kolkata");
 ?>
