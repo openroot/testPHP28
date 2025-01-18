@@ -37,7 +37,7 @@
 			// Printing storage contents.
 			function () use ($shelf) {
 				_process_\html::tabletPre($shelf->storage);
-				_process_\html::tabletShow("Hello World!");
+				_process_\html::tabletShow("Here you are.");
 			},
 			true
 		);
