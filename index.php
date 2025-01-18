@@ -44,9 +44,54 @@
 
 		$shelf = null;
 
+		$shelf = new _switch_\shelf(
+			"MySQL"
+		);
+
+		$shelf->theBracket("ABCD.");
+		_process_\html::tabletShow("Apple", "A");
+		_process_\html::tabletShow("Ball", "B");
+		_process_\html::tabletShow("Cat", "C");
+		_process_\html::tabletShow("Dog", "D");
+		$shelf->theBracket("EFGH.");
+		_process_\html::tabletShow("Eagle", "E");
+		_process_\html::tabletShow("Fun", "F");
+		_process_\html::tabletShow("Goat", "G");
+		_process_\html::tabletShow("Hen", "H");
+
+		$shelf = null;
+
+		$shelf = new _switch_\shelf(
+			"API"
+		);
+
+		$shelf->theBracket("IJKL.");
+		$shelf->theBracket("MNOP.");
+
+		$shelf = null;
+
+		$shelf = new _switch_\shelf(
+			"Design"
+		);
+
+		$shelf->theBracket("QRST.");
+		$shelf->theBracket("UVWX.");
+
+		$shelf = null;
+
+		$shelf = new _switch_\shelf(
+			"About"
+		);
+
+		_process_\html::tabletShow("Yak", "Y");
+		_process_\html::tabletShow("Zoo", "Z");
+
+		$shelf = null;
+
 		// ***************************************
 		// **************** MySQL ****************
 		// ***************************************
+		/*
 		_process_\html::screenStart("MySQL");
 
 		$mysql1URI = null;
@@ -98,7 +143,7 @@
 			null
 		);
 
-		_process_\html::screenEnd();
+		_process_\html::screenEnd();*/
 	}
 	catch (Exception $exception) {
 		_process_\html::tabletShow(anError($exception));
