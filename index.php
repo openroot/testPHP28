@@ -1,95 +1,96 @@
 <?php
 	require_once("testPHP28/_initiate_/private/public.php");
-	//require_once("testPHP28/_initiate_/private/protected.php");
+	require_once("testPHP28/_initiate_/private/protected.php");
 	require_once("testPHP28/_process_/void.php");
 	require_once("testPHP28/_execute_/data.php");
-
-	date_default_timezone_set("Asia/Kolkata");
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>testPHP28</title>
-		<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="css/style.css">
-	</head>
-	<body>
-
 <?php
+	_process_\setting::updateTimeZone(_process_\setting::timeZone["India"]);
+
+	$verbose = new _process_\verbose();
+	$verbose->printHeader();
+
 	try {
-		$functionToggleMessage = null;
-		$functionToggleComment = null;
-?>
+		// ***************************************
+		// ************** testPHP28 **************
+		// ***************************************
+		_process_\html::screenStart("testPHP28");
 
-<?php
-		screenStart("testPHP28");
+		_process_\feature::functionToggle(
+			// Printing greetings.
+			function () {
+				_process_\html::tabletShow("Hello World!", "testPHP28");
+			},
+			true,
+			"See you soon!",
+			"Good Bye"
+		);
 
-		// Printing greetings.
-		//$functionToggleMessage = "See you soon!";
-		//$functionToggleComment = "Good Bye";
-		functionToggle(function () {
-			tabletShow("Hello World!", "testPHP28");
-		}, $functionToggleMessage, $functionToggleComment);
+		_process_\html::screenEnd();
 
-		screenEnd();
-?>
-
-<?php
-		screenStart("MySQL");
+		// ***************************************
+		// **************** MySQL ****************
+		// ***************************************
+		_process_\html::screenStart("MySQL");
 
 		$mysql1URI = null;
 		$mysql1DB = null;
 
-		// Preparing MySQL URI string.
-		//$functionToggleMessage = "MySQL connection establishment is overridden to escape.";
-		//$functionToggleComment = "Offline";
-		functionToggle(function () {
-			global $configurationMysql;
-			global $mysql1URI;
-			$mysql1URI = "mysql:";
-			$mysql1URI .= "host=" . $configurationMysql["mysql1"]["connection"]["host"];
-			$mysql1URI .= ";port=" . $configurationMysql["mysql1"]["connection"]["port"];
-			$mysql1URI .= ";dbname=" . $configurationMysql["mysql1"]["connection"]["DB1"]["name"];
-			$mysql1URI .= ";sslmode=" . $configurationMysql["mysql1"]["connection"]["ssl"]["mode"];
-			$mysql1URI .= ";sslrootcert=" . $configurationMysql["mysql1"]["connection"]["ssl"]["caCertificatePath"];
-		}, $functionToggleMessage, $functionToggleComment);
+		_process_\feature::functionToggle(
+			// Preparing MySQL URI string.
+			function () {
+				global $configurationMysql;
+				global $mysql1URI;
+				$mysql1URI = "mysql:";
+				$mysql1URI .= "host=" . $configurationMysql["mysql1"]["connection"]["host"];
+				$mysql1URI .= ";port=" . $configurationMysql["mysql1"]["connection"]["port"];
+				$mysql1URI .= ";dbname=" . $configurationMysql["mysql1"]["connection"]["DB1"]["name"];
+				$mysql1URI .= ";sslmode=" . $configurationMysql["mysql1"]["connection"]["ssl"]["mode"];
+				$mysql1URI .= ";sslrootcert=" . $configurationMysql["mysql1"]["connection"]["ssl"]["caCertificatePath"];
+			},
+			true,
+			"MySQL connection establishment is overridden to escape.",
+			"Offline"
+		);
 
-		// Establishing MySQL connection.
-		//$functionToggleMessage = null;
-		//$functionToggleComment = null;
-		functionToggle(function () {
-			global $configurationMysql;
-			global $mysql1URI;
-			global $mysql1DB;
-			if (isset($mysql1URI)) {
-				$mysql1DB = new PDO($mysql1URI, $configurationMysql["mysql1"]["connection"]["username"], $configurationMysql["mysql1"]["connection"]["password"]);
-			}
-		}, $functionToggleMessage, $functionToggleComment);
+		_process_\feature::functionToggle(
+			// Establishing MySQL connection.
+			function () {
+				global $configurationMysql;
+				global $mysql1URI;
+				global $mysql1DB;
+				if (isset($mysql1URI)) {
+					$mysql1DB = new PDO($mysql1URI, $configurationMysql["mysql1"]["connection"]["username"], $configurationMysql["mysql1"]["connection"]["password"]);
+				}
+			},
+			true,
+			null,
+			null
+		);
 
-		// Executing MYSQL query for sample.
-		//$functionToggleMessage = null;
-		//$functionToggleComment = null;
-		functionToggle(function () {
-			global $mysql1DB;
-			if (isset($mysql1DB)) {
-				$statement = $mysql1DB->query("SELECT VERSION()");
-				tabletShow($statement->fetch()[0], aTicket("MySQL Version"));
-			}
-		}, $functionToggleMessage, $functionToggleComment);
+		_process_\feature::functionToggle(
+			// Executing MYSQL query for sample.
+			function () {
+				global $mysql1DB;
+				if (isset($mysql1DB)) {
+					$statement = $mysql1DB->query("SELECT VERSION()");
+					_process_\html::tabletShow($statement->fetch()[0], aTicket("MySQL Version"));
+				}
+			},
+			true,
+			null,
+			null
+		);
 
-		screenEnd();
-?>
-
-<?php
+		_process_\html::screenEnd();
 	}
 	catch (Exception $exception) {
-		tabletShow(anError($exception));
+		_process_\html::tabletShow(anError($exception));
 	}
-?>
 
-	</body>
-</html>
+	$verbose->printFooter();
+?>
 
 <?php
 //

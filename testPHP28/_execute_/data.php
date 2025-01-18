@@ -4,7 +4,7 @@
 	}
 
 	function anError(Exception $exception): string {
-		return "<br>Error[<br>" . $exception->getMessage() . "<br>]";
+		return "<br><i>Error[</i><br>" . $exception->getMessage() . "<br><i>]</i>";
 	}
 
 	function currentTime(): string {
