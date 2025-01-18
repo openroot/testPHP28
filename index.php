@@ -1,6 +1,6 @@
 <?php
 	require_once("testPHP28/_initiate_/private/public.php");
-	require_once("testPHP28/_initiate_/private/protected.php");
+	//require_once("testPHP28/_initiate_/private/protected.php");
 	require_once("testPHP28/_process_/void.php");
 	require_once("testPHP28/_execute_/data.php");
 
@@ -38,21 +38,21 @@
 <?php
 		screenStart("MySQL");
 
-		$mysqlURI = null;
-		$mysqlDB = null;
+		$mysql1URI = null;
+		$mysql1DB = null;
 
 		// Preparing MySQL URI string.
 		//$functionToggleMessage = "MySQL connection establishment is overridden to escape.";
 		//$functionToggleComment = "Offline";
 		functionToggle(function () {
 			global $configurationMysql;
-			global $mysqlURI;
-			$mysqlURI = "mysql:";
-			$mysqlURI .= "host=" . $configurationMysql["mysql1"]["connection"]["host"];
-			$mysqlURI .= ";port=" . $configurationMysql["mysql1"]["connection"]["port"];
-			$mysqlURI .= ";dbname=" . $configurationMysql["mysql1"]["connection"]["DB1"]["name"];
-			$mysqlURI .= ";sslmode=" . $configurationMysql["mysql1"]["connection"]["ssl"]["mode"];
-			$mysqlURI .= ";sslrootcert=" . $configurationMysql["mysql1"]["connection"]["ssl"]["caCertificatePath"];
+			global $mysql1URI;
+			$mysql1URI = "mysql:";
+			$mysql1URI .= "host=" . $configurationMysql["mysql1"]["connection"]["host"];
+			$mysql1URI .= ";port=" . $configurationMysql["mysql1"]["connection"]["port"];
+			$mysql1URI .= ";dbname=" . $configurationMysql["mysql1"]["connection"]["DB1"]["name"];
+			$mysql1URI .= ";sslmode=" . $configurationMysql["mysql1"]["connection"]["ssl"]["mode"];
+			$mysql1URI .= ";sslrootcert=" . $configurationMysql["mysql1"]["connection"]["ssl"]["caCertificatePath"];
 		}, $functionToggleMessage, $functionToggleComment);
 
 		// Establishing MySQL connection.
@@ -60,10 +60,10 @@
 		//$functionToggleComment = null;
 		functionToggle(function () {
 			global $configurationMysql;
-			global $mysqlURI;
-			global $mysqlDB;
-			if (isset($mysqlURI)) {
-				$mysqlDB = new PDO($mysqlURI, $configurationMysql["mysql1"]["connection"]["username"], $configurationMysql["mysql1"]["connection"]["password"]);
+			global $mysql1URI;
+			global $mysql1DB;
+			if (isset($mysql1URI)) {
+				$mysql1DB = new PDO($mysql1URI, $configurationMysql["mysql1"]["connection"]["username"], $configurationMysql["mysql1"]["connection"]["password"]);
 			}
 		}, $functionToggleMessage, $functionToggleComment);
 
@@ -71,9 +71,9 @@
 		//$functionToggleMessage = null;
 		//$functionToggleComment = null;
 		functionToggle(function () {
-			global $mysqlDB;
-			if (isset($mysqlDB)) {
-				$statement = $mysqlDB->query("SELECT VERSION()");
+			global $mysql1DB;
+			if (isset($mysql1DB)) {
+				$statement = $mysql1DB->query("SELECT VERSION()");
 				tabletShow($statement->fetch()[0], aTicket("MySQL Version"));
 			}
 		}, $functionToggleMessage, $functionToggleComment);
