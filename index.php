@@ -1,12 +1,13 @@
 <?php
 	require_once("testPHP28/_initiate_/private/public.php");
-	require_once("testPHP28/_initiate_/private/protected.php");
+	//require_once("testPHP28/_initiate_/private/protected.php");
 	require_once("testPHP28/_process_/void.php");
 	require_once("testPHP28/_execute_/data.php");
+	require_once("testPHP28/_switch_/view.php");
 ?>
 
 <?php
-	_process_\setting::updateTimeZone(_process_\setting::timeZone["India"]);
+	_process_\setting::updateTimeZone(_process_\setting::timeZone["UTC"]);
 
 	$verbose = new _process_\verbose();
 	$verbose->printHeader();
@@ -15,19 +16,33 @@
 		// ***************************************
 		// ************** testPHP28 **************
 		// ***************************************
-		_process_\html::screenStart("testPHP28");
+		$shelf = new _switch_\shelf(
+			"testPHP28",
+			["foo" => '"Foo Bar"']
+		);
 
+		$shelf->theBracket("Showing greetings.");
 		_process_\feature::functionToggle(
-			// Printing greetings.
+			// Showing greetings.
 			function () {
 				_process_\html::tabletShow("Hello World!", "testPHP28");
+				_process_\html::tabletShow("At the left side you can see the current date & time. Surprise yourself with PHP development onwards. Thank you!");
 			},
 			true,
 			"See you soon!",
 			"Good Bye"
 		);
+		$shelf->theBracket("Printing storage contents.");
+		_process_\feature::functionToggle(
+			// Printing storage contents.
+			function () use ($shelf) {
+				_process_\html::tabletPre($shelf->storage);
+				_process_\html::tabletShow("Hello World!", "testPHP28");
+			},
+			true
+		);
 
-		_process_\html::screenEnd();
+		$shelf = null;
 
 		// ***************************************
 		// **************** MySQL ****************

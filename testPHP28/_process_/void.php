@@ -13,21 +13,41 @@
 	}
 
 	class html {
+		private static function formatTicket(?string $ticket = null): string {
+			return "<b>" . (isset($ticket) ? $ticket : currentTime()) . " <@> </b> ";
+		}
+
+		public static function lineBreak(): string {
+			return "<br>";
+		}
+
+		public static function lineHorizontal(): string {
+			return "<hr>";
+		}
+
 		public static function flatShow(string $data): void {
 			echo $data;
 		}
 
 		public static function tabletShow(string $data, ?string $ticket = null): void {
-			$ticket = "<b>" . (isset($ticket) ? $ticket : currentTime()) . "</b>:\\\\ ";
-			echo "<br>" . $ticket . $data;
+			$ticket = self::formatTicket($ticket);
+			echo self::lineBreak() . $ticket . $data;
+		}
+
+		public static function tabletPre(array $data, ?string $ticket = null): void {
+			$ticket = self::formatTicket($ticket);
+			echo self::lineBreak() . $ticket . self::lineBreak() . self::lineBreak();
+			echo "<pre>";
+			print_r($data);
+			echo "</pre>";
 		}
 
 		public static function screenStart(string $data): void {
-			echo "<hr>" . $data ."<hr>";
+			echo self::lineHorizontal() . $data . self::lineHorizontal();
 		}
 
 		public static function screenEnd(): void {
-			echo "<br><br>";
+			echo self::lineBreak() . self::lineBreak();
 		}
 	}
 
