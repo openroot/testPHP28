@@ -54,21 +54,29 @@
 	}
 
 	class verbose {
-		public function printHeader(): void {
+		public function printHeader(?string $title = null, ?string $html = null): void {
+			$title = isset($title) ? $title : "testPHP28";
 			html::flatShow('
 				<!DOCTYPE html>
 				<html lang="en">
 					<head>
-						<title>testPHP28</title>
+						<title>' . $title . '</title>
 						<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 						<link rel="stylesheet" href="css/style.css">
 					</head>
 					<body>
 			');
+			if (isset($html)) {
+				html::flatShow($html);
+			}
 		}
 
-		public function printFooter(): void {
-			html::flatShow(html::lineBreak() . html::lineBreak() . '
+		public function printFooter(?string $html = null): void {
+			html::flatShow(html::lineBreak() . html::lineBreak());
+			if (isset($html)) {
+				html::flatShow($html);
+			}
+			html::flatShow('
 					</body>
 				</html>
 			');

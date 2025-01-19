@@ -9,7 +9,10 @@
 	try {
 		_process_\setting::updateTimeZone(_process_\setting::timeZone["India"]);
 		$verbose = new _process_\verbose();
-		$verbose->printHeader();
+		$verbose->printHeader(
+			"Prepaid PHP",
+			'<div style="display: flex; justify-content: center; align-items: center; border: 3px solid #FFF842; padding: 8px;">Say it, <h4>Prepaid PHP</h4></div>'
+		);
 	}
 	catch (Exception $exception) {
 		_process_\html::tabletShow(anError($exception));
@@ -20,9 +23,10 @@
 	$shelf = new _switch_\shelf(
 		"testPHP28", [
 			"foo" => '"Foo Bar"'
-		]
+		],
+		"Index"
 	);
-	$shelf->theBracket("Showing greetings.");
+	$shelf->theBracket("Showing greetings.", "---#--- ", " :\\\\\> &#x2665 ");
 	_process_\feature::functionToggle(
 		function () {
 			_process_\html::tabletShow("Hello World!", "testPHP28");
@@ -46,7 +50,7 @@
 <?php
 	$shelf = new _switch_\shelf(
 		"MySQL DATABASE", [
-			"credential" => $configuration["mysql1"]["credential"],
+			"credential" => $configuration["mysql2"]["credential"],
 			"URI" => null,
 			"DB" => null
 		]
@@ -115,7 +119,13 @@
 
 <?php
 	try {
-		$verbose->printFooter();
+		$verbose->printFooter('
+			<div style="display: flex; justify-content: center; align-items: center; border: 3px solid #FFF842; padding: 8px;">
+				<a href="https://github.com/openroot/testPHP28" target="_blank">Download it from <b>Github</b></a>
+				<span style="padding: 0 5px;"></span>
+				Copyright&copy; - 2025
+			</div>
+		');
 	}
 	catch (Exception $exception) {
 		_process_\html::tabletShow(anError($exception));

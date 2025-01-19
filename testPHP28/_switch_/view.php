@@ -8,11 +8,13 @@
 		private int $id;
 		private string $title;
 		public ?array $storage;
+		private string $preIndex;
 
-		function __construct(string $title, ?array $storage = null) {
+		function __construct(string $title, ?array $storage = null, ?string $preIndex = null) {
 			$this->id = 0;
 			$this->title = $title;
 			$this->storage = $storage;
+			$this->preIndex = isset($preIndex) ? $preIndex : "Content";
 			html::screenStart($this->title);
 		}
 
@@ -29,9 +31,11 @@
 			}
 		}
 
-		public function theBracket(string $banner): int {
+		public function theBracket(string $banner, ?string $preBanner = null, ?string $delimiter  = null): int {
+			$preBanner = isset($preBanner) ? $preBanner : "# ";
+			$delimiter = isset($delimiter) ? $delimiter : " :\\\\\> ";
 			$this->id++;
-			html::tabletShow("# " . $banner . " :\\\\> " . $this->title . html::lineBreak(), html::lineBreak() . "- Content " . $this->id);
+			html::tabletShow($preBanner . $banner . $delimiter . $this->title . html::lineBreak(), html::lineBreak() . "- " . $this->preIndex . " " . $this->id);
 			return $this->id;
 		}
 
