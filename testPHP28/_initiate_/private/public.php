@@ -5,5 +5,5 @@
 
 		It aggregates the "private/public" alternative for "private/protected" development architecture.
 	*/
-	require_once("private/public/mysql/configurationMysql.php");
+	require_once("private/public/configuration.php");
 ?>

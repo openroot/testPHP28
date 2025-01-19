@@ -7,7 +7,7 @@
 	class shelf {
 		private int $id;
 		private string $title;
-		private ?array $storage;
+		public ?array $storage;
 
 		function __construct(string $title, ?array $storage = null) {
 			$this->id = 0;

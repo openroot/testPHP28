@@ -1,7 +1,7 @@
 <?php
-	$configurationMysql = [
+	$configuration = [
 		"mysql1" => [
-			"connection" => [
+			"credential" => [
 				"host" => "",
 				"port" => "",
 				"username" => "",

@@ -1,157 +1,125 @@
 <?php
 	require_once("testPHP28/_initiate_/private/public.php");
-	//require_once("testPHP28/_initiate_/private/protected.php");
+	require_once("testPHP28/_initiate_/private/protected.php");
 	require_once("testPHP28/_process_/void.php");
-	require_once("testPHP28/_execute_/data.php");
 	require_once("testPHP28/_switch_/view.php");
 ?>
 
 <?php
-	_process_\setting::updateTimeZone(_process_\setting::timeZone["UTC"]);
-
-	$verbose = new _process_\verbose();
-	$verbose->printHeader();
-
 	try {
-		// ***************************************
-		// ************** testPHP28 **************
-		// ***************************************
-		$shelf = new _switch_\shelf(
-			"testPHP28",
-			["foo" => '"Foo Bar"']
-		);
-
-		$shelf->theBracket("Showing greetings.");
-		_process_\feature::functionToggle(
-			// Showing greetings.
-			function () {
-				_process_\html::tabletShow("Hello World!", "testPHP28");
-				_process_\html::tabletShow("At the left side you can see the current date & time. Surprise yourself with PHP development onwards. Thank you!");
-			},
-			true,
-			"See you soon!",
-			"Good Bye"
-		);
-		$shelf->theBracket("Printing storage contents.");
-		_process_\feature::functionToggle(
-			// Printing storage contents.
-			function () use ($shelf) {
-				_process_\html::tabletPre($shelf->storage);
-				_process_\html::tabletShow("Here you are.");
-			},
-			true
-		);
-
-		$shelf = null;
-
-		$shelf = new _switch_\shelf(
-			"MySQL"
-		);
-
-		$shelf->theBracket("ABCD.");
-		_process_\html::tabletShow("Apple", "A");
-		_process_\html::tabletShow("Ball", "B");
-		_process_\html::tabletShow("Cat", "C");
-		_process_\html::tabletShow("Dog", "D");
-		$shelf->theBracket("EFGH.");
-		_process_\html::tabletShow("Eagle", "E");
-		_process_\html::tabletShow("Fun", "F");
-		_process_\html::tabletShow("Goat", "G");
-		_process_\html::tabletShow("Hen", "H");
-
-		$shelf = null;
-
-		$shelf = new _switch_\shelf(
-			"Design"
-		);
-
-		$shelf->theBracket("IJKL.");
-		$shelf->theBracket("MNOP.");
-
-		$shelf = null;
-
-		$shelf = new _switch_\shelf(
-			"API"
-		);
-
-		$shelf->theBracket("QRST.");
-		$shelf->theBracket("UVWX.");
-
-		$shelf = null;
-
-		$shelf = new _switch_\shelf(
-			"About"
-		);
-
-		_process_\html::tabletShow("Yak", "Y");
-		_process_\html::tabletShow("Zoo", "Z");
-		_process_\html::flatShow(_process_\html::lineBreak());
-		_process_\html::flatShow(_process_\html::lineBreak());
-
-		$shelf = null;
-
-		// ***************************************
-		// **************** MySQL ****************
-		// ***************************************
-		/*
-		_process_\html::screenStart("MySQL");
-
-		$mysql1URI = null;
-		$mysql1DB = null;
-
-		_process_\feature::functionToggle(
-			// Preparing MySQL URI string.
-			function () {
-				global $configurationMysql;
-				global $mysql1URI;
-				$mysql1URI = "mysql:";
-				$mysql1URI .= "host=" . $configurationMysql["mysql1"]["connection"]["host"];
-				$mysql1URI .= ";port=" . $configurationMysql["mysql1"]["connection"]["port"];
-				$mysql1URI .= ";dbname=" . $configurationMysql["mysql1"]["connection"]["DB1"]["name"];
-				$mysql1URI .= ";sslmode=" . $configurationMysql["mysql1"]["connection"]["ssl"]["mode"];
-				$mysql1URI .= ";sslrootcert=" . $configurationMysql["mysql1"]["connection"]["ssl"]["caCertificatePath"];
-			},
-			true,
-			"MySQL connection establishment is overridden to escape.",
-			"Offline"
-		);
-
-		_process_\feature::functionToggle(
-			// Establishing MySQL connection.
-			function () {
-				global $configurationMysql;
-				global $mysql1URI;
-				global $mysql1DB;
-				if (isset($mysql1URI)) {
-					$mysql1DB = new PDO($mysql1URI, $configurationMysql["mysql1"]["connection"]["username"], $configurationMysql["mysql1"]["connection"]["password"]);
-				}
-			},
-			true,
-			null,
-			null
-		);
-
-		_process_\feature::functionToggle(
-			// Executing MYSQL query for sample.
-			function () {
-				global $mysql1DB;
-				if (isset($mysql1DB)) {
-					$statement = $mysql1DB->query("SELECT VERSION()");
-					_process_\html::tabletShow($statement->fetch()[0], aTicket("MySQL Version"));
-				}
-			},
-			true,
-			null,
-			null
-		);
-
-		_process_\html::screenEnd();*/
+		_process_\setting::updateTimeZone(_process_\setting::timeZone["India"]);
+		$verbose = new _process_\verbose();
+		$verbose->printHeader();
 	}
 	catch (Exception $exception) {
 		_process_\html::tabletShow(anError($exception));
 	}
+?>
 
-	$verbose->printFooter();
+<?php
+	$shelf = new _switch_\shelf(
+		"testPHP28", [
+			"foo" => '"Foo Bar"'
+		]
+	);
+	$shelf->theBracket("Showing greetings.");
+	_process_\feature::functionToggle(
+		function () {
+			_process_\html::tabletShow("Hello World!", "testPHP28");
+			_process_\html::tabletShow("At the left side you can see the current date & time. Surprise yourself with PHP development onwards. Thank you!");
+		},
+		true,
+		"See you soon!",
+		"Good Bye"
+	);
+	$shelf->theBracket("Printing storage contents.");
+	_process_\feature::functionToggle(
+		function () use ($shelf) {
+			_process_\html::tabletPre($shelf->storage);
+			_process_\html::tabletShow("Here you are.");
+		},
+		true
+	);
+	$shelf = null;
+?>
+
+<?php
+	$shelf = new _switch_\shelf(
+		"MySQL DATABASE", [
+			"credential" => $configuration["mysql1"]["credential"],
+			"URI" => null,
+			"DB" => null
+		]
+	);
+	$shelf->theBracket("Establishing MySQL connection.");
+	_process_\feature::functionToggle(
+		function () use ($shelf) {
+			$credential = $shelf->storage["credential"];
+			$URI = "mysql:";
+			$URI .= "host=" . $credential["host"];
+			$URI .= ";port=" . $credential["port"];
+			$URI .= ";dbname=" . $credential["DB1"]["name"];
+			$URI .= ";sslmode=" . $credential["ssl"]["mode"];
+			$URI .= ";sslrootcert=" . $credential["ssl"]["caCertificatePath"];
+			$shelf->storage["URI"] = $URI;
+			$shelf->storage["DB"] = new PDO($URI, $credential["username"], $credential["password"]);
+		},
+		true,
+		"MySQL connection establishment is overridden to escape.",
+		"Offline"
+	);
+	$shelf->theBracket("Executing MYSQL query for sample.");
+	_process_\feature::functionToggle(
+		function () use ($shelf) {
+			$DB = $shelf->storage["DB"];
+			$statement = $DB->query("SELECT VERSION()");
+			_process_\html::tabletShow($statement->fetch()[0], aTicket("MySQL Version"));
+		},
+		true,
+		null,
+		null
+	);
+	$shelf = null;
+?>
+
+<?php
+	/*
+	$shelf = new _switch_\shelf(
+		"Design Ground"
+	);
+	$shelf->theBracket("IJKL.");
+	$shelf->theBracket("MNOP.");
+	$shelf = null;
+	*/
+?>
+
+<?php
+	/*
+	$shelf = new _switch_\shelf(
+		"API Ground"
+	);
+	$shelf->theBracket("QRST.");
+	$shelf->theBracket("UVWX.");
+	$shelf = null;
+	*/
+?>
+
+<?php
+	$shelf = new _switch_\shelf(
+		"About testPHP28"
+	);
+	_process_\html::tabletShow("Yak", "Y");
+	_process_\html::tabletShow("Zoo", "Z");
+	$shelf = null;
+?>
+
+<?php
+	try {
+		$verbose->printFooter();
+	}
+	catch (Exception $exception) {
+		_process_\html::tabletShow(anError($exception));
+	}
 ?>
 
 <?php

@@ -8,5 +8,5 @@
 		Github does not store data under the "private/protected" directory.
 		New forking requires "private/protected" mandatory directory structure to convenience.
 	*/
-	require_once("private/protected/mysql/configurationMysql.php");
+	require_once("private/protected/configuration.php");
 ?>

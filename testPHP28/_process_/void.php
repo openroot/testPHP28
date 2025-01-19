@@ -1,6 +1,8 @@
 <?php
 	namespace _process_;
 
+	require_once("testPHP28/_execute_/data.php");
+
 	class setting {
 		const timeZone = [
 			"UTC" => "UTC",
@@ -66,7 +68,7 @@
 		}
 
 		public function printFooter(): void {
-			html::flatShow('
+			html::flatShow(html::lineBreak() . html::lineBreak() . '
 					</body>
 				</html>
 			');
