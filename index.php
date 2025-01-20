@@ -50,7 +50,7 @@
 <?php
 	$shelf = new _switch_\shelf(
 		"MySQL DATABASE", [
-			"credential" => $configuration["mysql2"]["credential"],
+			"credential" => $configuration["mysql1"]["credential"],
 			"URI" => null,
 			"DB" => null
 		]
