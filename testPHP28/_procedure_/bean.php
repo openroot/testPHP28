@@ -75,7 +75,7 @@
 		}
 	}
 
-	$bowl = new beanDump();
 	$cli = new phpCLI();
 	$ib = new internetBrowser();
+	$bowl = new beanDump();
 ?>
