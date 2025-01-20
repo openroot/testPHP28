@@ -9,6 +9,7 @@
 			"India" => "Asia/Kolkata",
 			"New York" => "America/New_York"
 		];
+
 		public static function updateTimeZone(string $timeZone = self::timeZone["India"]): void {
 			date_default_timezone_set($timeZone);
 		}
