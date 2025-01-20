@@ -15,8 +15,8 @@
 	}
 
 	class html {
-		private static function formatTicket(?string $ticket = null): string {
-			return "<b>" . (isset($ticket) ? $ticket : currentTime()) . " <@> </b> ";
+		public static function anError(\Exception $exception): string {
+			return "<br><i>Error[</i><br>" . $exception->getMessage() . "<br><i>]</i>";
 		}
 
 		public static function lineBreak(): string {
@@ -25,6 +25,10 @@
 
 		public static function lineHorizontal(): string {
 			return "<hr>";
+		}
+
+		private static function formatTicket(?string $ticket = null): string {
+			return "<b>" . (isset($ticket) ? $ticket : currentTime()) . " <@> </b> ";
 		}
 
 		public static function flatShow(string $data): void {
@@ -97,7 +101,7 @@
 				try {
 					call_user_func($name);
 				}
-				catch (Exception $exception) {
+				catch (\Exception $exception) {
 					html::tabletShow(html::anError($exception));
 				}
 			}

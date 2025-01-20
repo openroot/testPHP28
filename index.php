@@ -15,7 +15,7 @@
 		);
 	}
 	catch (Exception $exception) {
-		_process_\html::tabletShow(anError($exception));
+		_process_\html::tabletShow(_process_\html::anError($exception));
 	}
 ?>
 
@@ -128,7 +128,7 @@
 		');
 	}
 	catch (Exception $exception) {
-		_process_\html::tabletShow(anError($exception));
+		_process_\html::tabletShow(_process_\html::anError($exception));
 	}
 ?>
 
