@@ -38,7 +38,7 @@
 
 		private function browserName(): string {
 			$userAgent = isset($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : "";
-			$browser = "Unknown Browser";
+			$browser = "";
 			$browsers = [
 				"/msie/i" => "Internet Explorer",
 				"/firefox/i" => "Firefox",
