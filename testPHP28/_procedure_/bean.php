@@ -9,16 +9,25 @@
 			$this->basket = null;
 			$this->stick = null;
 		}
+
+		public function getBasket(): ?string {
+			return $this->basket;
+		}
+
+		public function getStick(): ?array {
+			return $this->stick;
+		}
 	}
 
 	class phpCLI extends bean {
 		function __construct() {
 			$this->basket = php_sapi_name() !== false ? php_sapi_name() : null;
-			$this->stick["argument"]["value"] = $this->terminalArgumentValue();
-			$this->stick["argument"]["count"] = $this->terminalArgumentCount();	
+			$this->stick["arguments"]["value"] = $this->terminalArguments();
+			$this->stick["arguments"]["count"] = $this->terminalArgumentCount();
+			$this->stick["server"] = isset($_SERVER) ? $_SERVER : null;
 		}
 
-		private function terminalArgumentValue(): ?array {
+		private function terminalArguments(): ?array {
 			global $argv;
 			return $argv;
 		}
@@ -32,7 +41,7 @@
 	class webBrowser extends bean {
 		function __construct() {
 			$this->basket = $this->browserName();
-			$this->stick["superglobal"] = $this->superglobalValue();
+			$this->stick["superglobals"] = $this->superglobals();
 		}
 
 		private function browserName(): string {
@@ -60,19 +69,41 @@
 			return $browser;
 		}
 
-		private function superglobalValue(): array {
+		private function superglobals(): array {
 			return [
-				"argv" => isset ($GLOBALS["argv"]) ? $GLOBALS["argv"] : null,
-				"argc" => isset ($GLOBALS["argc"]) ? $GLOBALS["argc"] : null,
-				'_SERVER' => isset($_SERVER) ? $_SERVER : null,
+				"_SERVER" => isset($_SERVER) ? $_SERVER : null,
 				"_GET" => isset($_GET) ? $_GET : null,
 				"_POST" => isset($_POST) ? $_POST : null,
 				"_FILES" => isset($_FILES) ? $_FILES : null,
 				"_COOKIE" => isset($_COOKIE) ? $_COOKIE : null,
 				"_SESSION" => isset($_SESSION) ? $_SESSION : null,
 				"_REQUEST" => isset($_REQUEST) ? $_REQUEST : null,
-				"_ENV" => isset($_ENV) ? $_ENV : null
+				"_ENV" => isset($_ENV) ? $_ENV : null,
+				"arguments" => [
+					"value" => isset($GLOBALS["argv"]) ? $GLOBALS["argv"] : null,
+					"count" => isset($GLOBALS["argc"]) ? $GLOBALS["argc"] : null
+				]
 			];
+		}
+	}
+
+	// TODO: Need to fix this function.
+	$className = "bean";
+	if (isset($_SERVER["PHP_SELF"]) && pathinfo($_SERVER["PHP_SELF"], PATHINFO_FILENAME) === $className) {
+		$phpCLI = new phpCLI();
+		$webBrowser = new webBrowser();
+
+		if ($phpCLI->getBasket() === "cli") {
+			echo "[phpCLI]" . PHP_EOL;
+			echo "phpCLI->getBasket(): " . $phpCLI->getBasket() . PHP_EOL;
+			echo "phpCLI->getStick(): " . print_r($phpCLI->getStick(), true) . PHP_EOL;
+		}
+		else if ($webBrowser->getBasket() !== "") {
+			echo "<pre>";
+			echo "[webBrowser]" . "<br>";
+			echo "webBrowser->getBasket(): " . $webBrowser->getBasket() . "<br>";
+			echo "webBrowser->getStick(): " . print_r($webBrowser->getStick(), true) . "<br>";
+			echo "</pre>";
 		}
 	}
 ?>
