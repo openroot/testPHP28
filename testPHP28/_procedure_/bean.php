@@ -1,5 +1,5 @@
 <?php
-	namespace _procedure_;
+	namespace _procedure_\bean;
 
 	class bean {
 		protected ?string $basket;
@@ -11,32 +11,33 @@
 		}
 	}
 
-	class beanDump extends bean {
-		function __construct() {
-			$this->basket = "bowl";
-			$this->stick["foo"] = ["bar", "baz"];
-		}
-	}
-
 	class phpCLI extends bean {
 		function __construct() {
 			$this->basket = php_sapi_name() !== false ? php_sapi_name() : null;
-			$this->stick["argument"] = $this->terminalArguments();
+			$this->stick["argument"]["value"] = $this->terminalArgumentValue();
+			$this->stick["argument"]["count"] = $this->terminalArgumentCount();	
 		}
 
-		private function terminalArguments(): array {
+		private function terminalArgumentValue(): ?array {
 			global $argv;
 			return $argv;
 		}
+
+		private function terminalArgumentCount(): ?int {
+			global $argc;
+			return $argc;
+		}
 	}
 
-	class internetBrowser extends bean {
+	class webBrowser extends bean {
 		function __construct() {
 			$this->basket = $this->browserName();
-			$this->stick["superglobal"] = $this->superglobalVariables();
+			$this->stick["superglobal"] = $this->superglobalValue();
 		}
 
 		private function browserName(): string {
+			TODO: // This function is not working properly. Need to fix it.
+			// For Edge it's showing Chrome.
 			$userAgent = isset($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : "";
 			$browser = "";
 			$browsers = [
@@ -59,7 +60,7 @@
 			return $browser;
 		}
 
-		private function superglobalVariables(): array {
+		private function superglobalValue(): array {
 			return [
 				"argv" => isset ($GLOBALS["argv"]) ? $GLOBALS["argv"] : null,
 				"argc" => isset ($GLOBALS["argc"]) ? $GLOBALS["argc"] : null,
@@ -74,8 +75,4 @@
 			];
 		}
 	}
-
-	$cli = new phpCLI();
-	$ib = new internetBrowser();
-	$bowl = new beanDump();
 ?>

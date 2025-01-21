@@ -9,6 +9,8 @@
 <?php
 	try {
 		_process_\setting::updateTimeZone(_process_\setting::timeZone["India"]);
+		$phpCLI = new _procedure_\bean\phpCLI();
+		$webBrowser = new _procedure_\bean\webBrowser();
 		$verbose = new _process_\verbose();
 		$verbose->printHeader(
 			"Prepaid PHP",
